@@ -2,11 +2,11 @@
 
 #read data
 datafile<-read.table("./data/household_power_consumption.txt", sep=";", header=T, colClasses = c('character', 'character', 'numeric','numeric', 'numeric', 'numeric','numeric', 'numeric', 'numeric'),na.strings='?')
-datafile$DateTime <- strptime(paste(datafile$Date, datafile$Time),"%d/%m/%Y %H:%M:%S")
+datafile$DateTime <- strptime(paste(datafile$Date, datafile$Time),"%d/%m/%Y %H:%M:%S") #format Date/Time into a desired format
 
-s <- subset(datafile,as.Date(DateTime) >= as.Date("2007-02-01")&as.Date(DateTime) <= as.Date("2007-02-02"))
+data_subset <- subset(datafile,as.Date(DateTime) >= as.Date("2007-02-01")&as.Date(DateTime) <= as.Date("2007-02-02")) # date conversion from character
 
 #produce plot2
-plot(s$DateTime, s$Global_active_power, xlab="", ylab="Global Active Power(kilowatts)", type="l",lty=1)
+plot(data_subset$DateTime, data_subset$Global_active_power, xlab="", ylab="Global Active Power(kilowatts)", type="l",lty=1)
 dev.copy(png,filename="plot2.png",height=480, width=480,bg="white")
 dev.off()
